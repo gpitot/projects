@@ -2,15 +2,18 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.html$/,
-        use: [{ loader: "html-loader", options: { minimize: true } }]
+        use: [{
+          loader: "html-loader",
+          options: {
+            minimize: true
+          }
+        }]
       },
       {
         test: /\.(png|jpe?g)/i,
-        use: [
-          {
+        use: [{
             loader: "url-loader",
             options: {
               name: "./img/[name].[ext]",
@@ -24,14 +27,7 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|eot|otf|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use : ['file-loader']
-        // use: [{
-        //     loader: 'file-loader',
-        //     options: {
-        //         name: '[name].[ext]',
-        //         outputPath: 'fonts/'
-        //     }
-        // }]
+        use: ['file-loader']
       },
       {
         test: /\.scss$/,
@@ -43,6 +39,18 @@ module.exports = {
         ]
       },
       {
+        test: /\.(mov|mp4)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]'
+            }  
+          }
+        ]
+      },
+
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
@@ -50,6 +58,7 @@ module.exports = {
           plugins: ['transform-class-properties']
         }
       }
+
     ]
   },
   plugins: [
